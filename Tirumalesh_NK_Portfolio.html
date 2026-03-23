@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tirumalesh N K — .NET Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0f1b2d;
+    --deep: #1a2d45;
+    --blue: #1e4d8c;
+    --accent: #3b82f6;
+    --cyan: #06b6d4;
+    --gold: #f59e0b;
+    --white: #f0f4ff;
+    --muted: #94a3b8;
+    --card: #162032;
+    --border: rgba(59,130,246,0.18);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(15,27,45,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color .25s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ---- HERO ---- */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    padding: 7rem 2rem 4rem;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent);
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(30,77,140,.35) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -55%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative; text-align: center; max-width: 760px;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: .35rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    font-size: .75rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    animation: fadeUp .7s ease both;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: .5rem;
+    animation: fadeUp .7s .1s ease both;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-role {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    animation: fadeUp .7s .2s ease both;
+    font-weight: 300;
+  }
+  .hero-stats {
+    display: flex; justify-content: center; gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    animation: fadeUp .7s .3s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label { font-size: .75rem; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; margin-top: .2rem; }
+  .hero-cta {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp .7s .4s ease both;
+  }
+  .btn-primary {
+    padding: .75rem 2rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 20px rgba(59,130,246,.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(59,130,246,.5); }
+  .btn-outline {
+    padding: .75rem 2rem;
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: 8px;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+  }
+  .btn-outline:hover { background: rgba(59,130,246,.1); }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 960px; margin: 0 auto; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: .75rem;
+    color: var(--accent);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    margin-bottom: .6rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .section-sub {
+    color: var(--muted);
+    max-width: 540px;
+    margin-bottom: 3rem;
+    font-size: .95rem;
+  }
+  .divider {
+    width: 48px; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--cyan));
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+
+  /* ---- ABOUT ---- */
+  #about { background: var(--deep); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text p { color: #b0bec5; margin-bottom: 1rem; font-size: .975rem; line-height: 1.8; }
+  .award-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .award-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.4rem;
+    display: flex; align-items: flex-start; gap: .9rem;
+    transition: border-color .25s, transform .2s;
+  }
+  .award-card:hover { border-color: var(--gold); transform: translateX(4px); }
+  .award-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: .1rem; }
+  .award-title { font-weight: 600; font-size: .9rem; color: var(--white); margin-bottom: .2rem; }
+  .award-desc { font-size: .8rem; color: var(--muted); }
+
+  /* ---- SKILLS ---- */
+  #skills { background: var(--navy); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: border-color .25s, transform .2s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--cyan));
+    opacity: 0; transition: opacity .25s;
+  }
+  .skill-card:hover { border-color: rgba(59,130,246,.5); transform: translateY(-4px); }
+  .skill-card:hover::before { opacity: 1; }
+  .skill-icon { font-size: 1.6rem; margin-bottom: .7rem; }
+  .skill-category { font-weight: 700; font-size: .9rem; color: var(--white); margin-bottom: .7rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .tag {
+    padding: .25rem .65rem;
+    background: rgba(59,130,246,.12);
+    color: var(--accent);
+    border-radius: 999px;
+    font-size: .75rem;
+    font-family: 'DM Mono', monospace;
+    border: 1px solid rgba(59,130,246,.2);
+  }
+
+  /* ---- EXPERIENCE ---- */
+  #experience { background: var(--deep); }
+  .timeline { position: relative; padding-left: 1.5rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; padding-left: 1.5rem; }
+  .timeline-dot {
+    position: absolute; left: -1.95rem; top: .45rem;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+    box-shadow: 0 0 0 3px rgba(59,130,246,.25);
+  }
+  .timeline-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: .6rem; }
+  .job-title { font-weight: 700; font-size: 1.05rem; color: var(--white); }
+  .job-company { color: var(--accent); font-size: .875rem; font-weight: 500; }
+  .job-period {
+    font-family: 'DM Mono', monospace;
+    font-size: .75rem;
+    color: var(--muted);
+    background: rgba(59,130,246,.08);
+    border: 1px solid var(--border);
+    padding: .2rem .65rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .job-bullets { list-style: none; padding: 0; }
+  .job-bullets li {
+    color: #94a3b8;
+    font-size: .9rem;
+    padding: .3rem 0 .3rem 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .job-bullets li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: .75rem;
+    top: .35rem;
+  }
+
+  /* ---- CERTIFICATIONS ---- */
+  #certifications { background: var(--navy); }
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+  .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.3rem;
+    text-align: center;
+    transition: border-color .25s, transform .2s;
+  }
+  .cert-card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+  .cert-badge { font-size: 2rem; margin-bottom: .6rem; }
+  .cert-title { font-size: .85rem; font-weight: 600; color: var(--white); margin-bottom: .3rem; line-height: 1.4; }
+  .cert-issuer { font-size: .75rem; color: var(--muted); }
+
+  /* ---- CONTACT ---- */
+  #contact { background: var(--deep); }
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--cyan), var(--gold));
+  }
+  .contact-card p { color: var(--muted); margin-bottom: 2rem; font-size: .975rem; line-height: 1.7; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: .5rem;
+    padding: .6rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .85rem;
+    transition: border-color .2s, color .2s, background .2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,.07); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: .8rem;
+    border-top: 1px solid var(--border);
+    background: var(--navy);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 680px) {
+    .about-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .contact-card { padding: 2rem 1.5rem; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">TNK</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Open to Opportunities · Bengaluru, India</div>
+    <h1 class="hero-name">Tirumalesh <span>N K</span></h1>
+    <p class="hero-role">Full Stack .NET Developer &nbsp;·&nbsp; ASP.NET Core &nbsp;·&nbsp; C# &nbsp;·&nbsp; Web API &nbsp;·&nbsp; SQL Server</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">4.3+</div>
+        <div class="stat-label">Years Exp.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Promotions</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Infosys Certs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">🏆</div>
+        <div class="stat-label">HiLife Award</div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#experience" class="btn-outline">View Experience</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">// About Me</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a Full Stack .NET Developer with 4.3+ years of experience at <strong style="color:var(--white)">Infosys Limited</strong>, building scalable enterprise web applications for large-scale healthcare systems. I love crafting clean backend architectures with ASP.NET Core and C#, and connecting them to intuitive frontends with Angular.</p>
+        <p>Throughout my career, I've grown from a System Engineer to a Technology Analyst — delivering production-critical features, mentoring junior developers, and earning recognition for performance and impact. I'm passionate about writing maintainable code, solving hard problems, and shipping software that works reliably at scale.</p>
+        <p>I'm currently looking for opportunities where I can contribute to high-performing engineering teams, deepen my full-stack expertise, and build things that genuinely matter.</p>
+      </div>
+      <div class="award-cards">
+        <div class="award-card">
+          <div class="award-icon">🏆</div>
+          <div>
+            <div class="award-title">Infosys HiLife Award — FY'26</div>
+            <div class="award-desc">Recognized for exceptional work, impact, and outstanding contributions to the organization.</div>
+          </div>
+        </div>
+        <div class="award-card">
+          <div class="award-icon">⚡</div>
+          <div>
+            <div class="award-title">Insta Award</div>
+            <div class="award-desc">Awarded for going above and beyond in delivering project results at Infosys.</div>
+          </div>
+        </div>
+        <div class="award-card">
+          <div class="award-icon">🚀</div>
+          <div>
+            <div class="award-title">Fastest Promotion — 18 Months</div>
+            <div class="award-desc">Promoted to Senior System Engineer ahead of the standard timeline — top 5% of cohort.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">// Technical Skills</div>
+    <h2 class="section-title">What I Work With</h2>
+    <div class="divider"></div>
+    <p class="section-sub">A carefully honed stack across backend, frontend, databases, and tooling.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-category">Backend Development</div>
+        <div class="skill-tags">
+          <span class="tag">ASP.NET Core</span>
+          <span class="tag">C#</span>
+          <span class="tag">Web API</span>
+          <span class="tag">ASP.NET MVC</span>
+          <span class="tag">RESTful Services</span>
+          <span class="tag">.NET Framework</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-category">Frontend</div>
+        <div class="skill-tags">
+          <span class="tag">Angular</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-category">Database & ORM</div>
+        <div class="skill-tags">
+          <span class="tag">SQL Server</span>
+          <span class="tag">Entity Framework Core</span>
+          <span class="tag">LINQ</span>
+          <span class="tag">ADO.NET</span>
+          <span class="tag">T-SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-category">Tools & DevOps</div>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">Visual Studio</span>
+          <span class="tag">IIS</span>
+          <span class="tag">Postman</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔍</div>
+        <div class="skill-category">Quality & Testing</div>
+        <div class="skill-tags">
+          <span class="tag">Debugging</span>
+          <span class="tag">Root-Cause Analysis</span>
+          <span class="tag">Code Review</span>
+          <span class="tag">Production Support</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤝</div>
+        <div class="skill-category">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="tag">Team Mentoring</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Cross-Team Collab</span>
+          <span class="tag">Communication</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">// Work History</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="divider"></div>
+    <p class="section-sub">4.3+ years at Infosys Limited, progressively growing in scope and responsibility.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="job-title">Technology Analyst</div>
+            <div class="job-company">Infosys Limited · Bengaluru</div>
+          </div>
+          <div class="job-period">Jan 2025 – Present</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Developing full-stack enterprise applications using <strong style="color:var(--white)">.NET Core and Angular</strong> for large-scale healthcare systems.</li>
+          <li>Designing and consuming <strong style="color:var(--white)">RESTful APIs</strong> to enable responsive, data-driven UI behaviour.</li>
+          <li>Collaborating with distributed teams to deliver secure, maintainable, production-ready solutions.</li>
+          <li>Managing version control, code reviews, and deployments using <strong style="color:var(--white)">Git and GitHub</strong>.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="job-title">Senior System Engineer <span style="font-size:.75rem;color:var(--gold);margin-left:.5rem;">⭐ Promoted in 18 months</span></div>
+            <div class="job-company">Infosys Limited · Bengaluru</div>
+          </div>
+          <div class="job-period">Jul 2022 – Dec 2024</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Led production development and critical issue resolution for healthcare apps built on <strong style="color:var(--white)">C#, ASP.NET Core, and SQL Server</strong>.</li>
+          <li>Implemented backend enhancements with <strong style="color:var(--white)">Entity Framework Core</strong> to boost data access performance.</li>
+          <li>Supported and enhanced Angular-based client-side features integrated with backend APIs.</li>
+          <li>Mentored junior developers and enforced coding standards and best practices across the team.</li>
+          <li>Reduced turnaround time for critical defects through structured debugging and root-cause analysis.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="job-title">System Engineer</div>
+            <div class="job-company">Infosys Limited · Bengaluru</div>
+          </div>
+          <div class="job-period">Aug 2021 – Jun 2022</div>
+        </div>
+        <ul class="job-bullets">
+          <li>Contributed to full-cycle development — coding, testing, deployment, and production support.</li>
+          <li>Built and maintained <strong style="color:var(--white)">RESTful web services</strong> consumed by Angular-based frontend applications.</li>
+          <li>Worked on provider enhancement requests ensuring application stability and performance.</li>
+          <li>Gained deep hands-on experience with <strong style="color:var(--white)">JavaScript, HTML, C#, and SQL</strong> in enterprise environments.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container">
+    <div class="section-label">// Credentials</div>
+    <h2 class="section-title">Certifications</h2>
+    <div class="divider"></div>
+    <p class="section-sub">All actively certified by Infosys — validated expertise across the .NET full-stack.</p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-badge">🏅</div>
+        <div class="cert-title">ASP.NET Core Full Stack Developer</div>
+        <div class="cert-issuer">Infosys Certified</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🏅</div>
+        <div class="cert-title">Developing Services using ASP.NET Core Web API</div>
+        <div class="cert-issuer">Infosys Certified</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🏅</div>
+        <div class="cert-title">Entity Framework Core</div>
+        <div class="cert-issuer">Infosys Certified</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🏅</div>
+        <div class="cert-title">DBMS using SQL</div>
+        <div class="cert-issuer">Infosys Certified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">// Let's Connect</div>
+    <h2 class="section-title" style="text-align:center">Open to Opportunities</h2>
+    <div class="divider" style="margin:0 auto 1rem"></div>
+    <div class="contact-card">
+      <p>I'm actively looking for backend and full-stack .NET roles where I can contribute to building scalable, high-performance systems. If you're hiring or know someone who is — let's talk!</p>
+      <div class="contact-links">
+        <a href="mailto:tirumalesh628@gmail.com" class="contact-link">
+          <span>✉️</span> tirumalesh628@gmail.com
+        </a>
+        <a href="tel:+917975986192" class="contact-link">
+          <span>📞</span> +91 7975986192
+        </a>
+      </div>
+      <a href="mailto:tirumalesh628@gmail.com" class="btn-primary">Send Me a Message</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Tirumalesh N K &nbsp;·&nbsp; Full Stack .NET Developer &nbsp;·&nbsp; Bengaluru, India</p>
+</footer>
+
+</body>
+</html>
