@@ -27,7 +27,81 @@
     line-height: 1.6;
     overflow-x: hidden;
   }
+/* ---- PROJECTS ---- */
+.project-video {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+#projects { background: var(--navy); }
 
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: transform .25s, border-color .25s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+}
+
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: .6rem;
+  color: var(--white);
+}
+
+.project-desc {
+  font-size: .9rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-bottom: 1rem;
+}
+
+.project-points {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.2rem;
+}
+
+.project-points li {
+  font-size: .85rem;
+  color: #94a3b8;
+  padding-left: 1rem;
+  position: relative;
+  margin-bottom: .3rem;
+}
+
+.project-points li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.project-actions {
+  display: flex;
+  gap: .8rem;
+  flex-wrap: wrap;
+}
   /* ---- NAV ---- */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -359,13 +433,13 @@
 
 <!-- NAV -->
 <nav>
-
-  <div class="nav-logo">.NET Developer</div>
+  <div class="nav-logo">.Net Developer</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#certifications">Certs</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -575,7 +649,52 @@
     </div>
   </div>
 </section>
+<section id="projects">
+  <div class="container">
+    <div class="section-label">// Featured Work</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="divider"></div>
+    <p class="section-sub">A selection of projects showcasing my full-stack .NET development expertise.</p>
 
+    <div class="projects-grid">
+
+      <!-- BOOKSTORE PROJECT -->
+  <video controls class="project-video">
+    <source src="https://tirumalesh628.github.io/LKMBookStore_MVCCore.mp4" type="video/mp4">
+    Your browser does not support video.
+  </video>
+      <div class="project-card">
+
+        <div class="project-title">📚 Online Bookstore Management System</div>
+        <div class="project-desc">
+          A full-stack web application to manage book inventory, customer orders, and secure transactions. Designed with scalable backend architecture and responsive UI.
+        </div>
+
+        <div class="project-tech">
+          <span class="tag">ASP.NET Core</span>
+          <span class="tag">C#</span>
+          <span class="tag">Web API</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">Entity Framework</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+
+        <ul class="project-points">
+          <li>Implemented CRUD operations for books, users, and orders</li>
+          <li>Designed REST APIs for seamless frontend-backend integration</li>
+          <li>Optimized database queries using Entity Framework & LINQ</li>
+          <li>Built responsive UI for better user experience</li>
+        </ul>
+
+        <div class="project-actions">          <a href="https://github.com/Tirumalesh628/LKMBookStore" class="btn-primary">View Code</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 <!-- CERTIFICATIONS -->
 <section id="certifications">
   <div class="container">
