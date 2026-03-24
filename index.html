@@ -128,6 +128,44 @@
     transition: color .25s;
   }
   .nav-links a:hover { color: var(--accent); }
+  /* Hamburger button */
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  nav {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(15,27,45,0.95);
+    backdrop-filter: blur(12px);
+    
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    
+    padding: 1rem 0;
+    display: none; /* hidden by default */
+  }
+
+  .nav-links.active {
+    display: flex; /* show when clicked */
+  }
+}
 
   /* ---- HERO ---- */
   #hero {
@@ -433,8 +471,10 @@
 
 <!-- NAV -->
 <nav>
+
   <div class="nav-logo">.Net Developer</div>
-  <ul class="nav-links">
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+     <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
